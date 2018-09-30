@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Marked in the browser</title>
+  <style>
+    body {
+      margin-top: 10px;
+    }
+    #content {
+      /*width: 40%;*/
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+</textarea>
+<div id="content"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.1.1/tocbot.css">
+<script src="../dist/bundle.js"></script>
+<!--<script src="index.js"></script>-->
+<script>
+  // document.querySelector('#input').addEventListener('input', function (ev) {
+  //   document.getElementById('content').innerHTML = marked(ev.target.value)
+  // })
+  var md = `
+  # console.freelog.com\n\n## 资源系统\n\n### resource policy language\n根据freelog的业务定义policy的语法，然后基于[antlr4](https://github.com/antlr/antlr4)词法分析器制定policy的语法解析规则。\n\n具体规则查看[resource-policy-lang](https://github.com/freelogfe/resource-policy-lang)\n\n### 资源\n\n#### 资源组成要素\n\n- 基础属性，包括资源描述、资源类型、资源内容（文件），当资源类型为\`\`widget\`\`时，属性需包括widget名，widget名必须跟web component widget里定义属性需包括widget名，widget名必须跟web component widget里定义属性需包括widget名，widget名必须跟web component widget里定义属性需包括widget名，widget名必须跟web component widget里定义属性需包括widget名，widget名必须跟web component widget里定义的component name一致。\n- meta信息，描述资源自定义信息的JSON内容\n- 资源策略，使用[resource-policy-lang](https://github.com/freelogfe/resource-policy-lang)描写资源的使用策略\n\n#### 资源创建\n\n| 输入项| 描述| 是否可更改|\n| --- | --- | --- |\n|资源描述||yes\n|资源类型|除已有的选择列表项外，可自行定义资源类型，直接在输入框中输入即可|no\n|widget名称|资源类型为widget时才出现。保持跟web component中的tag name一致|no\n|资源文件|提交对应资源类型的文件|no\n|meta信息|当资源类型为widget时。必须包含version属性，且version需符合[semver](https://semver.org/lang/zh-CN/)|yes\n|资源策略|资源策略\`\`更新\`\`后，只针对后来的签约生效，已签约的则只会按老的资源策略执行|yes\n\nwidget和pagebuild这两种资源的创建与其他类型的资源存在一定的差异，下面单独写。\n\n#### pagebuild资源开发\n在console系统上创建资源，当选择资源类型为pagebuild时，会出现pagebuild的builder。pagebuilder支持源码模式和可视化拖拽模式开发pagebuild。组成pagebuild的widget不仅仅是当前资源作者，而是freelog全局的widget都可以用来搭建pagebuild。\n\n#### widget资源开发\nwidget资源基于web component规范进行开发，是组成pagebuild的有机部分。\n\n\`\` scaffold \`\`\n\n使用脚手架freelog-cli快速生成开发widget的项目文件，提供widget的开发环境、代码构建。具体可查看[freelog-cli](https://github.com/freelogfe/freelog-cli)。\n\n\n\`\` widget开发指南 \`\`\n\nwidget的开发可查看[widget开发指南](https://freelogfe.github.io/)\n\n## 节点系统\n\n### 节点\n每个节点对应一个节点域名，创建节点时可自定义节点域名，类型类似xxxx.freelog.com。\n\n节点组成要素\n\n| 属性| 描述| 可否更改|\n|---| ---|---|\n| 节点名称| 描述节点，会作为页面的title进行展示| no\n| 节点域名| 用户可通过节点域名来访问节点，域名格式xxxx.freelog.com| no\n\n### presentable\npresentable一定是属于某个节点的，主要作用是串连虚拟资源在资源作者-节点-用户的流转\n\npresentable组成因素\n\n- 资源，可在资源市场中找到需要签约的虚拟资源\n- 资源合同，选择资源开发作者制定的合同策略进行签约，即可创建资源合同\n- 使用策略(policy)，节点根据[presentable-policy-lang](https://github.com/freelogfe/presentable-policy-lang)的语法自定义面向普通用户的资源使用策略\n\n## 分组系统\npolicy制定时，需要添加乙方，除了官方规定的\`\` nodes \`\`、\`\` public\`\`、\`\`REGISTERED_USERS\`\`等特定写法外，用户可通过分组自定义乙方的组成。\n\n### 创建分组\n\n**分组描述** 描述分组的内容，目前一旦创建后，描述不可更改\n\n**分组类型** 用户分组、节点分组，选择用户分组后，分组成员只能是用户，节点分组同理，只能是节点。\n\n**分组成员** 选择好分组类型后，可输入对应的userId或nodeId进行查询，然后进行选择。\n\n\n### 查找\n略，暂时默认直接展示所有分组。\n\n### 更新\n通过分组列表进入分组的管理面板，可对分组成员进行增减操作\n\n
+  # Marked in the browser
+
+  ![freelog](https://ephen.me/img/avatar.jpg)
+
+  Rendered by **marked**.
+  Rendered by **marked**.
+  ## Marked in the browser Marked in the browser Marked in the browser
+  Rendered by **marked**.
+
+  ### Marked in the browser
+  Rendered by **marked**.
+![freelog](https://ephen.me/img/avatar.jpg)
+  Rendered by **marked**.
+  Rendered by **marked**.
+
+  # Marked in the browser
+![freelog](https://ephen.me/img/avatar.jpg)
+  Rendered by **marked**.
+
+  Rendered by **marked**.
+  Rendered by **marked**.
+
+  ## Marked in the browser
+
+  Rendered by **marked**.
+  Rendered by **marked**.
+
+  # Marked in the browser
+
+  Rendered by **marked**.
+
+  Rendered by **marked**.
+  Rendered by **marked**.
+  ## Marked in the browser
+  Rendered by **marked**.
+  Rendered by **marked**.
+
+  # Marked in the browser
+
+  Rendered by **marked**.
+  Rendered by **marked**.
+
+  Rendered by **marked**.
+  Rendered by **marked**.
+  ## Marked in the browser
+  Rendered by **marked**.
+  Rendered by **marked**.
+![freelog](https://ephen.me/img/avatar.jpg)
+  Rendered by **marked**.
+
+  # Marked in the browser
+
+  Rendered by **marked**.
+
+  # Marked in the browser
+
+  Rendered by **marked**.
+  Rendered by **marked**.
+  ## Marked in the browser
+  Rendered by **marked**.
+  Rendered by **marked**.
+  ### Marked in the browser
+  Rendered by **marked**.
+
+  # Marked in the browser
+
+  Rendered by **marked**.
+
+  # Marked in the browser
+![freelog](https://ephen.me/img/avatar.jpg)
+  Rendered by **marked**.
+  `;
+
+  var markdown = new MarkdownParser({
+    container: document.querySelector('#content')
+  })
+  markdown.render(md)
+  // document.querySelector('#content').innerHTML = markdown.render(md)
+</script>
+</body>
+</html>
